@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Market Analytics Dashboard</title>
+    <link rel="stylesheet" href="/static/styles.css">
+    <style>
+        body {
+            background-image: url('https://www.shutterstock.com/image-vector/business-candle-stick-graph-chart-600nw-2169971673.jpg'); /* Replace with your image path or URL */
+            background-size: cover; 
+            background-attachment: fixed; 
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Market Analytics Dashboard</h1>
+    </header>
+
+    <!-- Navigation Buttons for each section -->
+    <nav>
+        <button class="nav-button active" onclick="showSection('customer-segmentation')">Customer Segmentation</button>
+        <button class="nav-button" onclick="showSection('sales-forecasting')">Sales Forecasting</button>
+        <button class="nav-button" onclick="showSection('campaign-effectiveness')">Campaign Effectiveness</button>
+        <button class="nav-button" onclick="showSection('top-selling-products')">Top-Selling Products</button>
+        <button class="nav-button" onclick="showSection('sales-trend')">Sales Trend</button>
+    </nav>
+
+<!-- Introduction Section -->
+    <section id="introduction">
+        <h2>Welcome to the Market Analytics Dashboard</h2>
+        <p>Here, you will find insightful data and trends to help you understand the market dynamics. Explore various sections to get detailed analysis on customer segmentation, sales forecasting, campaign effectiveness, and more.</p>
+    </section>
+    
+    <!-- Dashboard Sections -->
+    <section id="dashboard-content">
+        <div id="customer-segmentation" class="dashboard-section">
+            <h2>Customer Segmentation</h2>
+            {% include "customer_segmentation_graph.html" %}
+        </div>
+
+        <div id="sales-forecasting" class="dashboard-section" style="display:none;">
+            <h2>Sales Forecasting</h2>
+            {% include "sales_forecasting_graph.html" %}
+        </div>
+
+        <div id="campaign-effectiveness" class="dashboard-section" style="display:none;">
+            <h2>Campaign Effectiveness</h2>
+            {% include "campaign_effectiveness_graph.html" %}
+        </div>
+        <div id="top-selling-products" class="dashboard-section" style="display:none;">
+            <h2>Top-Selling Products</h2>
+            {% include "top_selling_products_graph.html" %}
+        </div>
+        <div id="sales-trend" class="dashboard-section" style="display:none;">
+            <h2>Sales Trend Over Time</h2>
+            {% include "sales_trend_graph.html" %}
+        </div>
+
+    </section>
+
+    <script>
+        // JavaScript function to switch between sections and highlight active button
+        function showSection(sectionId) {
+            // Hide all sections
+            document.querySelectorAll('.dashboard-section').forEach(section => {
+                section.style.display = 'none';
+            });
+            // Show the selected section
+            document.getElementById(sectionId).style.display = 'block';
+            
+            // Remove 'active' class from all buttons
+            document.querySelectorAll('.nav-button').forEach(button => {
+                button.classList.remove('active');
+            });
+            // Add 'active' class to the clicked button
+            event.target.classList.add('active');
+        }
+    </script>
+</body>
+</html>
